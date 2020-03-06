@@ -15,20 +15,22 @@ WORKDIR /app/clojure-clr
 RUN git clone --depth 1 https://github.com/arcadia-unity/clojure-clr.git --branch unity .
 RUN make
 
-CMD [bash]
-
 
 # --------------------------------------------------------------
 # build Clojure sample
 FROM mono:latest as buildClojureSample
 LABEL maintainer "https://github.com/dnikku"
 
-COPY ./src /app/src
+COPY --from=buildClojureClr /app/clojure-clr/bin/4.0/Release/ /app/clojure-clr/lib40
+ENV CLOJURE_LOAD_PATH=/app/clojure-clr/lib40
 
-WORKDIR /app/src
+COPY ./src /app/clojure.sample/src
 
-RUN nuget restore sample.csproj
+WORKDIR /app/clojure.sample
 
-RUN msbuild /p:Configuration=Debug sample.csproj
+RUN nuget restore src/sample.csproj
+
+RUN msbuild -noLogo /p:Configuration=Debug /p:OutputPath=../bin src/sample.csproj \
+  && rm -rf src/obj/
 
 CMD [bash]

@@ -18,7 +18,7 @@ case "$1" in
 	;;
 
     build-run)
-	docker build . --target buildClojureClr --tag $IMAGE || exit 10
+	docker build . --target buildClojureSample --tag $IMAGE || exit 10
 	#;;
 
   #  run)
