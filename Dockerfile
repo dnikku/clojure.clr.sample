@@ -34,3 +34,8 @@ RUN msbuild -noLogo /p:Configuration=Debug /p:OutputPath=../bin src/sample.cspro
   && rm -rf src/obj/
 
 CMD [bash]
+
+
+#----------------------------
+# mono-runtime only for executing exe
+# see https://github.com/triptixx/mono-runtime/blob/master/Dockerfile

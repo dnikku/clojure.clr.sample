@@ -3,6 +3,8 @@
 INSTANCE=my-clj
 IMAGE=${INSTANCE}.i
 
+function run () {
+
 case "$1" in
     rmi_prune)
 	docker ps -qa -f 'status=exited' | xargs -r docker rm
@@ -32,3 +34,6 @@ case "$1" in
 
 	;;
 esac
+}
+
+run $* 2>&1 | tee build.log

@@ -6,10 +6,16 @@
     <AssemblyName>Sample</AssemblyName>
   </PropertyGroup>
 
+
   <ItemGroup>
     <Reference Include="Clojure">
       <HintPath>../../clojure-clr/lib40/Clojure.dll</HintPath>
     </Reference>
+
+    <!--
+    <PackageReference Include="Clojure" Version="1.9.0" Condition=" '$(TargetFramework)' == 'netcoreapp3.0' " />
+    -->
+    
   </ItemGroup>
 
 </Project>
