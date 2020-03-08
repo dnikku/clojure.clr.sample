@@ -24,14 +24,14 @@ LABEL maintainer "https://github.com/dnikku"
 COPY --from=buildClojureClr /app/clojure-clr/bin/4.0/Release/ /app/clojure-clr/lib40
 ENV CLOJURE_LOAD_PATH=/app/clojure-clr/lib40
 
-COPY ./src /app/clojure.sample/src
+COPY ./sample /app/sample
 
-WORKDIR /app/clojure.sample
+WORKDIR /app/sample
 
-RUN nuget restore src/sample.csproj
+RUN nuget restore sample.csproj
 
-RUN msbuild -noLogo /p:Configuration=Debug /p:OutputPath=../bin src/sample.csproj \
-  && rm -rf src/obj/
+RUN msbuild -noLogo /p:Configuration=Debug /p:OutputPath=./bin sample.csproj \
+  && rm -rf obj/
 
 CMD [bash]
 
