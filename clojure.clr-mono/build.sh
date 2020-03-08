@@ -16,7 +16,7 @@ function run () {
 
       docker run -dt --name $INSTANCE $IMAGE echo "DONE."
 
-      docker cp $INSTANCE:/app/clojure-clr/bin/4.0/Release/ ./bin/
+      docker cp $INSTANCE:/app/clojure-clr/bin ./bin/
     ;;
 
     *)

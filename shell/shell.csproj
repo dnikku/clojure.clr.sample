@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net45</TargetFramework>
+    <AssemblyName>clr-shell</AssemblyName>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Reference Include="Clojure">
+      <HintPath>../clojure.clr-mono/bin/4.0/Release/Clojure.dll</HintPath>
+    </Reference>
+
+  </ItemGroup>
+
+</Project>
