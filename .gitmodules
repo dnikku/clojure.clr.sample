@@ -1,0 +1,3 @@
+[submodule "clojure-clr/clojure-clr"]
+	path = clojure-clr/clojure-clr
+	url = git@github.com:dnikku/clojure-clr.git
