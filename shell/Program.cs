@@ -12,7 +12,6 @@ namespace shell_repl
         void Log(string message) =>
             Console.WriteLine($"{start.ElapsedMilliseconds,5:N0}: {message}");
 
-
         void Run(string[] args)
         {
             Log($"starting...");
@@ -21,20 +20,21 @@ namespace shell_repl
             IFn load = Clojure.var("clojure.core", "load-file");
             Log($" clojure.core/load-file found.");
 
-            //IFn printEx = Clojure.var("clojure.stacktrace", "print-cause-trace");
-            //Log($" clojure.stacktrace/print-stack-trace found.");
-
-            AppDomain.CurrentDomain.UnhandledException += (_, e) =>
-            {
-                //Log(e.ExceptionObject.ToString());
-
-                //printEx.invoke(e.ExceptionObject);
-            };
+            IFn printEx = Clojure.var("clojure.stacktrace", "print-cause-trace");
+            Log($" clojure.stacktrace/print-stack-trace found.");
 
             var script = args[0];
             Log($" (load-file '{script}') starting...");
-            load.invoke(script);
-            Log($" (load-file '{script}') done.");
+            try
+            {
+                load.invoke(script);
+                Log($" (load-file '{script}') done.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                printEx.invoke(ex);
+            }
 
             Log("done.");
         }

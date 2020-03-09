@@ -1,17 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Copyright>Copyright © 2020</Copyright>
+    <Version>1.10.0</Version>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net45</TargetFramework>
+    <NeutralLanguage></NeutralLanguage>
     <AssemblyName>clr-shell</AssemblyName>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Clojure">
-      <HintPath>../clojure.clr-mono/bin/4.0/Release/Clojure.dll</HintPath>
-    </Reference>
-
+    <ProjectReference Include="../clojure-clr/clojure-clr/Clojure/Clojure.Source/Clojure.Source.csproj" />
+    <ProjectReference Include="../clojure-clr/clojure-clr/Clojure/Clojure/Clojure.csproj" />
   </ItemGroup>
 
 </Project>

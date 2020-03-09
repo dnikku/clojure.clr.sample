@@ -4,23 +4,23 @@ set -e # stop on first error
 
 cd "$(dirname "$0")"
 
-export CLOJURE_LOAD_PATH=$(cd "../clojure.clr-mono/bin/4.0/Debug" && pwd) 
+CLR_SHELL="./bin/Debug/netcoreapp3.1/clr-shell"
+export CLOJURE_LOAD_PATH=$(cd "$(dirname $CLR_SHELL)" && pwd)
 
 function run () {
 
   case "${1:-build-run}" in
     build-run)
       echo "BUILD:"
-      dotnet restore shell.csproj
-      msbuild -noLogo /p:Configuration=Debug shell.csproj -v:m
+      dotnet build shell.csproj --nologo
 
       echo "RUN: server"
-      mono ./bin/Debug/net45/clr-shell.exe "src/server.clj"
+      $CLR_SHELL "src/server.clj"
     ;;
 
     client)
       echo "RUN: client"
-      mono ./bin/Debug/net45/clr-shell.exe "src/client.clj"
+      $CLR_SHELL "src/client.clj"
     ;;
 
     clean)
